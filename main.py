@@ -59,7 +59,7 @@ def get_text_messages(message):
 
 
 def get_text():
-    array_texts = ['https://www.lyrics.com/lyric/28267385/Kendrick+Lamar/Bitch%2C+Don%E2%80%99t+Kill+My+Vibe', 'https://www.lyrics.com/lyric/29260986/Kendrick+Lamar/Swimming+Pools+%28Drank%29', 'https://www.lyrics.com/lyric/28219632/Kendrick+Lamar/Compton']
+    array_texts = ['https://www.lyrics.com/lyric/28267385/Kendrick+Lamar/Bitch%2C+Don%E2%80%99t+Kill+My+Vibe', 'https://www.lyrics.com/lyric/29260986/Kendrick+Lamar/Swimming+Pools+%28Drank%29', 'https://www.lyrics.com/lyric/28219632/Kendrick+Lamar/Compton', 'https://www.lyrics.com/lyric/38645539/MORGENSHTERN/Cristal+%26+%D0%9C%D0%9E%D0%81%D0%A2', 'https://www.lyrics.com/lyric-lf/4533121/MORGENSHTERN/Lollipop', 'https://www.lyrics.com/lyric/35696775/Joji/Slow+Dancing+in+the+Dark', 'https://www.lyrics.com/lyric/35597036/Joji/Can%27t+Get+Over+You']
     bobtek = requests.get(random.choice(array_texts))
     soup = bs4.BeautifulSoup(bobtek.text, "html.parser")
     result_find = soup.select('#lyric-body-text')
