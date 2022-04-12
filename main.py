@@ -1,5 +1,5 @@
 import random
-
+import json
 import bs4
 import requests
 from telebot import types
@@ -38,14 +38,16 @@ def get_text_messages(message):
         bot.send_message(chat_id, text="Вы в главном меню ", reply_markup=markup)
     elif ms_text == "Треки":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        btn1 = types.KeyboardButton("Прислать обложку")
+        btn1 = types.KeyboardButton("Прислать рандомную обложку")
         btn2 = types.KeyboardButton("Прислать текст песни")
         btn3 = types.KeyboardButton("Прислать рандомный текст песни")
         back = types.KeyboardButton("Вернуться в главное меню")
         markup.add(btn1, btn2, btn3, back)
         bot.send_message(chat_id, text="Вы перешли в Треки", reply_markup=markup)
-    elif ms_text == "/cover" or ms_text == "Прислать обложку":
-        bot.send_photo(chat_id, photo="https://upload.wikimedia.org/wikipedia/ru/9/97/One_More_City.jpg")
+    elif ms_text == "/cover" or ms_text == "Прислать рандомную обложку":
+        contents = requests.get('https://randomfox.ca/floof.json').json()
+        urlCOV = contents['#fox_img_link']
+        bot.send_photo(chat_id, photo=urlCOV, caption="Обложка трека")
     elif ms_text == "Прислать текст песни":
         bot.send_message(chat_id, text="Она улетела, уехала или умерла\nЭтой ночью\nОна улетела, уехала или умерла\nНе знаю точно\nОна улетела, уехала или умерла\nТак будет проще\nОна лишь хотела тепла, но как спичка сгорела дотла\nВ моей личке последняя строчка")
     elif ms_text == "Управление":
