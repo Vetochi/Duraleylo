@@ -53,7 +53,7 @@ def get_text_messages(message):
     elif ms_text == "Картинки":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         btn1 = types.KeyboardButton("Прислать собаку")
-        btn2 = types.KeyboardButton("Прислать кота")
+        btn2 = types.KeyboardButton("Прислать картинку")
         back = types.KeyboardButton("Вернуться в главное меню")
         markup.add(btn1, btn2, back)
         bot.send_message(chat_id, text="Вы перешли в Картинки", reply_markup=markup)
@@ -61,7 +61,7 @@ def get_text_messages(message):
         contents = requests.get('https://random.dog/woof.json').json()
         urlDOG = contents['url']
         bot.send_photo(chat_id, photo=urlDOG, caption="Бабака")
-    elif ms_text == "Прислать ыкота":
+    elif ms_text == "Прислать картинку":
         contents = requests.get('https://picsum.photos/200').json()
         urlCAT = contents['url']
         bot.send_photo(chat_id, photo=urlCAT, caption="Вот вам")
