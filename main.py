@@ -61,7 +61,7 @@ def get_text_messages(message):
         contents = requests.get('https://random.dog/woof.json').json()
         urlDOG = contents['url']
         bot.send_photo(chat_id, photo=urlDOG, caption="Бабака")
-    elif ms_text == "Прислать кота":
+    elif ms_text == "Прислать ыкота":
         contents = requests.get('https://picsum.photos/200').json()
         urlCAT = contents['url']
         bot.send_photo(chat_id, photo=urlCAT, caption="Вот вам")
