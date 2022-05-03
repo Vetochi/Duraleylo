@@ -1,8 +1,5 @@
 import random
-<<<<<<< HEAD
-=======
 import json
->>>>>>> origin/main
 import bs4
 import requests
 from telebot import types
@@ -35,30 +32,46 @@ def get_text_messages(message):
     if ms_text == "Главное меню" or ms_text == "Вернуться в главное меню":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         btn1 = types.KeyboardButton("Треки")
-        btn2 = types.KeyboardButton("Игра")
+        btn2 = types.KeyboardButton("Картинки")
+        btn3 = types.KeyboardButton("Игра")
         back = types.KeyboardButton("Помощь")
-        markup.add(btn1, btn2, back)
+        markup.add(btn1, btn2, btn3, back)
         bot.send_message(chat_id, text="Вы в главном меню ", reply_markup=markup)
+
     elif ms_text == "Треки":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        btn1 = types.KeyboardButton("Прислать рандомную обложку")
-        btn2 = types.KeyboardButton("Прислать текст песни")
-        btn3 = types.KeyboardButton("Прислать рандомный текст песни")
+        btn1 = types.KeyboardButton("Прислать текст песни")
+        btn2 = types.KeyboardButton("Прислать рандомный текст песни")
         back = types.KeyboardButton("Вернуться в главное меню")
-        markup.add(btn1, btn2, btn3, back)
+        markup.add(btn1, btn2, back)
         bot.send_message(chat_id, text="Вы перешли в Треки", reply_markup=markup)
-    elif ms_text == "/cover" or ms_text == "Прислать рандомную обложку":
-        contents = requests.get('https://randomfox.ca/floof.json').json()
-        urlCOV = contents['#fox_img_link']
-        bot.send_photo(chat_id, photo=urlCOV, caption="Обложка трека")
     elif ms_text == "Прислать текст песни":
         bot.send_message(chat_id, text="Она улетела, уехала или умерла\nЭтой ночью\nОна улетела, уехала или умерла\nНе знаю точно\nОна улетела, уехала или умерла\nТак будет проще\nОна лишь хотела тепла, но как спичка сгорела дотла\nВ моей личке последняя строчка")
     elif ms_text == "Прислать рандомный текст песни":
         bot.send_message(chat_id, text=get_text())
+
+    elif ms_text == "Картинки":
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        btn1 = types.KeyboardButton("Прислать собаку")
+        btn2 = types.KeyboardButton("Прислать кота")
+        back = types.KeyboardButton("Вернуться в главное меню")
+        markup.add(btn1, btn2, back)
+        bot.send_message(chat_id, text="Вы перешли в Картинки", reply_markup=markup)
+    elif ms_text == "Прислать собаку":
+        contents = requests.get('https://random.dog/woof.json').json()
+        urlDOG = contents['url']
+        bot.send_photo(chat_id, photo=urlDOG, caption="Бабака")
+    elif ms_text == "Прислать кота":
+        contents = requests.get('https://picsum.photos/200').json()
+        urlCAT = contents['url']
+        bot.send_photo(chat_id, photo=urlCAT, caption="Котяра")
+
+
     elif ms_text == "Игра":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         btn1 = types.KeyboardButton("Камень, ножницы, бумага")
-        markup.add(btn1)
+        back = types.KeyboardButton("Вернуться в главное меню")
+        markup.add(btn1, back)
         bot.send_message(chat_id, text="Вы перешли в Игра", reply_markup=markup)
     elif ms_text == "Помощь" or ms_text == "/help":
         bot.send_message(chat_id, text="Автор: стдуент группы 1-мд-20 Поспелов Никита ")
@@ -75,6 +88,6 @@ def get_text():
 
 
 # -----------------------------------------------------------------------
-bot.polling(none_stop=True, interval=0) # Запускаем бота
+bot.polling(none_stop=True, interval=0)
 
 print()
