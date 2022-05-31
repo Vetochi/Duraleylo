@@ -84,7 +84,7 @@ def get_text_messages(message):
         btn2 = types.KeyboardButton(quiz.answers[1])
         btn3 = types.KeyboardButton(quiz.answers[2])
         btn4 = types.KeyboardButton(quiz.answers[3])
-        back = types.KeyboardButton("Вернуться назад")
+        back = types.KeyboardButton("Вернуться в главное меню")
         markup.add(btn1, btn2, btn3, btn4, back)
         bot.send_photo(chat_id, photo=quiz.kart, reply_markup=markup)
 
