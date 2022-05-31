@@ -5,6 +5,7 @@ import requests
 from telebot import types
 import telebot
 from covers.Covers import get_cover
+from quiz import Quiz
 
 
 bot = telebot.TeleBot('5214235125:AAHOZOca1VqP2LDPLZWk5srQGi7WDRKGPnc')
@@ -74,13 +75,29 @@ def get_text_messages(message):
         markup.add(btn1, back)
         bot.send_message(chat_id, text="Вы перешли в Игра", reply_markup=markup)
     elif ms_text == "Музыкальная викторина":
-        album = get_cover()
-        bot.send_photo(chat_id, photo=album["img"], caption=f'{album["name"]} - {album["artist"]}'
-                       )
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        quiz = Quiz()
+        print(quiz.answers)
+        btn1 = types.KeyboardButton(quiz.answers[0])
+        btn2 = types.KeyboardButton(quiz.answers[1])
+        btn3 = types.KeyboardButton(quiz.answers[2])
+        btn4 = types.KeyboardButton(quiz.answers[3])
+        back = types.KeyboardButton("Вернуться назад")
+        markup.add(btn1, btn2, btn3, btn4, back)
+        bot.send_photo(chat_id, photo=quiz.kart, reply_markup=markup)
+        print(quiz.coransw)
+        if ms_text == Quiz.coransw:
+            bot.send_message(chat_id, 'Верно')
+        elif ms_text != Quiz.coransw:
+            bot.send_message(chat_id, 'Не верно')
+
     elif ms_text == "Помощь" or ms_text == "/help":
         bot.send_message(chat_id, text="Автор: стдуент группы 1-мд-20 Поспелов Никита ")
     else:
-        bot.send_message(chat_id, text="Вас слышно... Ваше сообщение: " + ms_text)
+        bot.send_message(chat_id, text="Вас слышно")
+
+
+
 
 
 def get_text():
