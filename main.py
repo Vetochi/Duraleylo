@@ -24,10 +24,11 @@ def start(message, res=False):
                      text="Привет, {0.first_name}! Я тестовый бот для курса программирования на языке ПаЙтон".format(
                          message.from_user), reply_markup=markup)
 
-
+quiz_correctanswer = ""
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
+    global quiz_correctanswer
     chat_id = message.chat.id
     ms_text = message.text
     if ms_text == "Главное меню" or ms_text == "Вернуться в главное меню":
@@ -77,6 +78,7 @@ def get_text_messages(message):
     elif ms_text == "Музыкальная викторина":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         quiz = Quiz()
+        quiz_correctanswer = quiz.coransw
         print(quiz.answers)
         btn1 = types.KeyboardButton(quiz.answers[0])
         btn2 = types.KeyboardButton(quiz.answers[1])
@@ -85,16 +87,15 @@ def get_text_messages(message):
         back = types.KeyboardButton("Вернуться назад")
         markup.add(btn1, btn2, btn3, btn4, back)
         bot.send_photo(chat_id, photo=quiz.kart, reply_markup=markup)
-        print(quiz.coransw)
-        if ms_text == Quiz.coransw:
-            bot.send_message(chat_id, 'Верно')
-        elif ms_text != Quiz.coransw:
-            bot.send_message(chat_id, 'Не верно')
 
     elif ms_text == "Помощь" or ms_text == "/help":
         bot.send_message(chat_id, text="Автор: стдуент группы 1-мд-20 Поспелов Никита ")
     else:
-        bot.send_message(chat_id, text="Вас слышно")
+        if ms_text == quiz_correctanswer:
+            bot.send_message(chat_id, 'Верно')
+        else:
+            bot.send_message(chat_id, 'Не верно')
+
 
 
 

@@ -7,6 +7,7 @@ class Quiz:
     answers = []
     coransw = ""
     def __init__ (self):
+        self.answers = []
         self.cover()
         self.answ()
         self.shuffle()
